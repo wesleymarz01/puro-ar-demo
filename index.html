@@ -103,6 +103,20 @@
       text-shadow: 0 1px 6px rgba(7, 11, 18, 0.9);
     }
     .logo-lockup-lg .logo-sub { margin-top: 2px; font-size: 12px; }
+    /* Legendas dos números do topo: mesma escala do site (13px celular / 14px desktop = texto padrão) */
+    .font-mono.text-2xl + .uppercase.tracking-wider:not(.font-mono) {
+      margin-top: 4px;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      color: #94A3B8;
+    }
+    @media (min-width: 640px) {
+      .font-mono.text-2xl + .uppercase.tracking-wider:not(.font-mono) { font-size: 14px; }
+      /* um pouco mais de largura para "Energia vs. ar-cond." não quebrar no hífen */
+      .grid:has(> div > .font-mono.text-2xl + .uppercase.tracking-wider) { max-width: 38rem; }
+    }
     /* Etiqueta do topo cabe em uma linha no celular */
     @media (max-width: 639px) { .font-mono.hero-badge-txt { font-size: 10.5px; letter-spacing: 0.04em; } }
     /* Números grandes de destaque em Barlow Condensed (mesma família dos títulos) */
