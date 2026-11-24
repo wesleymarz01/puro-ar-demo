@@ -27,7 +27,8 @@
           fontFamily: {
             display: ['"Barlow Condensed"', 'sans-serif'],
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            /* "mono" agora é a fonte de UI com números tabulares — rótulos com cara profissional, não de código */
+            mono: ['"Plus Jakarta Sans"', 'sans-serif'],
           },
           colors: {
             obsidian: '#070B12',
@@ -74,6 +75,26 @@
     a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
       outline: 2px solid #38BDF8;
       outline-offset: 2px;
+    }
+
+    /* Rótulos/etiquetas: números alinhados e tamanhos mínimos legíveis */
+    .font-mono { font-variant-numeric: tabular-nums; }
+    .font-mono.text-\[10px\] { font-size: 12px; line-height: 1.4; }
+    .font-mono.text-\[11px\] { font-size: 13px; line-height: 1.4; }
+    .font-mono.text-xs { font-size: 13.5px; line-height: 1.45; }
+    .font-mono.uppercase { letter-spacing: 0.07em; font-weight: 700; }
+    /* Tamanho mínimo legível nos textos pequenos restantes (exceto a assinatura "CLIMATIZAÇÃO" do logo) */
+    .text-\[9px\] { font-size: 11px; letter-spacing: 0.06em; font-weight: 600; }
+    .text-\[10px\]:not(.font-mono):not([class*="tracking-[0.3"]) { font-size: 12px; }
+    .text-\[11px\]:not(.font-mono):not([class*="tracking-[0.3"]) { font-size: 12.5px; }
+    p.text-xs { font-size: 13px; line-height: 1.5; }
+    /* Rótulos pequenos em slate-500 ficavam apagados no fundo escuro */
+    .text-\[9px\].text-slate-500, .text-\[10px\].text-slate-500, .text-\[11px\].text-slate-500 { color: #94A3B8; }
+    /* Números grandes de destaque em Barlow Condensed (mesma família dos títulos) */
+    .font-mono.text-2xl, .font-mono.text-6xl {
+      font-family: "Barlow Condensed", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.01em;
     }
 
     body {
