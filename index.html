@@ -128,6 +128,17 @@
     @media (min-width: 1024px) and (max-width: 1279px) {
       #productsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
+    /* Instalações: legendas das fotos 14px celular / 16px desktop, com degradê mais alto para leitura */
+    #obras .obra-card > span {
+      font-size: 14px;
+      line-height: 1.45;
+      padding: 48px 16px 16px;
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.45) 55%, transparent);
+    }
+    @media (min-width: 640px) {
+      #obras .obra-card > span { font-size: 16px; padding: 56px 20px 18px; }
+    }
+    #obraDialogCap, #obrasLightboxCaption { font-size: 16px; }
     /* Etiqueta do topo cabe em uma linha no celular */
     @media (max-width: 639px) { .font-mono.hero-badge-txt { font-size: 10.5px; letter-spacing: 0.04em; } }
     /* Números grandes de destaque em Barlow Condensed (mesma família dos títulos) */
