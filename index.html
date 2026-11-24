@@ -117,6 +117,17 @@
       /* um pouco mais de largura para "Energia vs. ar-cond." não quebrar no hífen */
       .grid:has(> div > .font-mono.text-2xl + .uppercase.tracking-wider) { max-width: 38rem; }
     }
+    /* Cards de produto: mesma escala do site (rótulo 12px · valor 14px · botões 16/14px) */
+    #productsGrid .font-mono.text-\[11px\] { font-size: 14px; gap: 10px; }
+    #productsGrid .font-mono.text-\[11px\] > div { padding: 10px 12px; }
+    #productsGrid .text-\[9px\] { font-size: 12px; margin-bottom: 2px; }
+    #productsGrid span.font-display.text-\[10px\] { font-size: 13px; padding: 5px 11px; }
+    #productsGrid button.font-display.text-sm { font-size: 16px; }
+    #productsGrid button.font-mono.text-xs { font-size: 14px; }
+    /* Notebooks 1024–1279px: 4 colunas ficavam estreitas demais para as especificações */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      #productsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
     /* Etiqueta do topo cabe em uma linha no celular */
     @media (max-width: 639px) { .font-mono.hero-badge-txt { font-size: 10.5px; letter-spacing: 0.04em; } }
     /* Números grandes de destaque em Barlow Condensed (mesma família dos títulos) */
