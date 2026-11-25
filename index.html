@@ -428,7 +428,7 @@
           <!-- Telemetria Rápida Hero -->
           <div class="grid grid-cols-3 gap-3 sm:gap-5 pt-5 border-t border-white/10 max-w-lg">
             <div>
-              <div class="font-mono font-bold text-2xl sm:text-3xl text-ice-400">32.000</div>
+              <div class="font-mono font-bold text-2xl sm:text-3xl text-ice-400">80.000</div>
               <div class="text-[11px] uppercase tracking-wider text-slate-400">m³/h de vazão</div>
             </div>
             <div>
@@ -828,7 +828,7 @@
               <div class="p-4 rounded-2xl bg-obsidian/90 border border-gold-400/35 space-y-2">
                 <div class="font-mono text-[10px] uppercase tracking-wider text-gold-400">Configuração Ideal Sugerida</div>
                 <div id="resModelName" class="font-display font-extrabold uppercase text-2xl text-white leading-tight">
-                  2x Climatizador Industrial Teto Puro Ar 24.000
+                  1x Climatizador Supper Master 45
                 </div>
                 <p id="resSavingsText" class="text-xs text-slate-300 leading-relaxed">
                   Economia estimada de até <strong class="text-eco-400">R$ 2.150/mês</strong> em energia elétrica comparado a ar-condicionado equivalente.
@@ -849,7 +849,7 @@
     </section>
 
     <!-- =================================================================== -->
-    <!-- SEÇÃO 05 — CATÁLOGO PREMIUM INTERATIVO (8 PRODUTOS + RENDERS HD)    -->
+    <!-- SEÇÃO 05 — CATÁLOGO PREMIUM INTERATIVO (CATÁLOGO REAL 2026)    -->
     <!-- =================================================================== -->
     <section id="catalogo" class="chapter-section relative py-24 lg:py-32 bg-obsidian border-t border-white/5">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -866,9 +866,11 @@
 
           <!-- Filtros de Categoria -->
           <div id="catalogFilters" class="flex flex-wrap gap-2">
-            <button type="button" data-filter="todos" class="filter-btn active px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-ice-500 to-eco-500 text-obsidian transition-all">Todos (8)</button>
-            <button type="button" data-filter="teto-parede" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">Teto / Parede</button>
-            <button type="button" data-filter="portateis" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">Portáteis</button>
+            <button type="button" data-filter="todos" class="filter-btn active px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-ice-500 to-eco-500 text-obsidian transition-all">Todos (18)</button>
+            <button type="button" data-filter="master" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">Linha Master</button>
+            <button type="button" data-filter="abs" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">ABS Black</button>
+            <button type="button" data-filter="light" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">Linha Light</button>
+            <button type="button" data-filter="exaustor" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">Exaustores</button>
             <button type="button" data-filter="dutos" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">Dutos Galvanizados</button>
             <button type="button" data-filter="acessorios" class="filter-btn px-4 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 border border-white/10 transition-all">Acessórios &amp; Grelhas</button>
           </div>
@@ -1433,7 +1435,7 @@
         area: 300,
         height: 5,
         airflow: 42000,
-        suggestedText: '2x Climatizador Industrial Teto Puro Ar 24.000',
+        suggestedText: '1x Climatizador Supper Master 45',
         monthlySavings: 2150
       };
 
@@ -1443,18 +1445,18 @@
         calcState.airflow = Math.max(8000, neededAirflow);
 
         // Sugestão inteligente de modelo
+        // Sugestão com modelos reais do catálogo (vazão em m³/h)
+        const MODELS = [
+          [25000, 'Climatizador Supper 25'],
+          [35000, 'Climatizador Supper Master 35'],
+          [45000, 'Climatizador Supper Master 45'],
+          [55000, 'Climatizador Supper Master 55'],
+          [80000, 'Climatizador Supper 80 ABS Black']
+        ];
+        const fit = MODELS.find(m => calcState.airflow <= m[0]);
         let units = 1;
-        let model = 'Climatizador Comercial Parede Puro Ar 18.000';
-        if (calcState.airflow <= 14000) {
-          units = 1;
-          model = 'Climatizador Portátil / Parede Puro Ar 15.000';
-        } else if (calcState.airflow <= 26000) {
-          units = 1;
-          model = 'Climatizador Industrial Teto Puro Ar 24.000';
-        } else {
-          units = Math.max(2, Math.ceil(calcState.airflow / 28000));
-          model = 'Climatizador Industrial Teto Puro Ar 32.000';
-        }
+        let model = fit ? fit[1] : 'Climatizador Supper 80 ABS Black';
+        if (!fit) units = Math.ceil(calcState.airflow / 80000);
 
         calcState.suggestedText = `${units}x ${model}`;
         calcState.monthlySavings = Math.round(units * 1080 + (calcState.area * 1.4));
@@ -1506,70 +1508,443 @@
       };
 
       // =====================================================================
-      // 6. CATÁLOGO INTERATIVO PREMIUM (8 PRODUTOS COM RENDERS VETORIAIS HD)
+      // 6. CATÁLOGO INTERATIVO PREMIUM (CATÁLOGO REAL 2026)
       // =====================================================================
       const PRODUCTS = [
         {
-          id: 'puro-teto-32k',
-          name: 'Climatizador Industrial Teto 32.000',
-          category: 'teto-parede',
-          badge: 'Mais Vendido',
-          badgeStyle: 'bg-gold-400 text-obsidian',
-          vazao: '32.000 m³/h',
-          area: 'Até 300 m²',
-          consumo: '1,1 kW',
-          garantia: '1 Ano',
-          renderType: 'roof-32k',
-          img: 'img/climatizador-recorte.png',
-          imgFit: 'object-contain p-4'
+          id: "master-25",
+          name: "Supper Master 25",
+          category: "master",
+          badge: "Alumínio",
+          badgeStyle: "bg-ice-400 text-obsidian",
+          vazao: "25.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "25.000 m³/h"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Reservatório",
+              "30 L"
+            ],
+            [
+              "Abertura",
+              "67×67 cm (teto)"
+            ]
+          ],
+          img: "img/catalogo/master-25.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,04×1,04×0,90 m · 60 kg (sem água) · Placa evaporativa 10 cm 45/45"
         },
         {
-          id: 'puro-teto-24k',
-          name: 'Climatizador Evaporativo Teto 24.000',
-          category: 'teto-parede',
-          badge: 'Linha Pesada',
-          badgeStyle: 'bg-ice-500 text-obsidian',
-          vazao: '24.000 m³/h',
-          area: 'Até 220 m²',
-          consumo: '0,85 kW',
-          garantia: '1 Ano',
-          renderType: 'roof-24k'
+          id: "master-35",
+          name: "Supper Master 35",
+          category: "master",
+          badge: "Alumínio",
+          badgeStyle: "bg-ice-400 text-obsidian",
+          vazao: "35.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "35.000 m³/h"
+            ],
+            [
+              "Motor",
+              "3 cv · 2,2 kW"
+            ],
+            [
+              "Reservatório",
+              "30 L"
+            ],
+            [
+              "Abertura",
+              "67×67 cm (teto)"
+            ]
+          ],
+          img: "img/catalogo/master-35.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,04×1,04×1,16 m · 60 kg (sem água) · Placa evaporativa 10 cm 45/45"
         },
         {
-          id: 'puro-parede-18k',
-          name: 'Climatizador de Parede Comercial 18.000',
-          category: 'teto-parede',
-          badge: 'Comércio & Igrejas',
-          badgeStyle: 'bg-eco-500 text-obsidian',
-          vazao: '18.000 m³/h',
-          area: 'Até 160 m²',
-          consumo: '0,65 kW',
-          garantia: '1 Ano',
-          renderType: 'wall-18k'
+          id: "master-45",
+          name: "Supper Master 45",
+          category: "master",
+          badge: "Lançamento",
+          badgeStyle: "bg-gold-400 text-obsidian",
+          vazao: "45.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "45.000 m³/h"
+            ],
+            [
+              "Motor",
+              "4 cv · 3,0 kW"
+            ],
+            [
+              "Reservatório",
+              "40 L"
+            ],
+            [
+              "Abertura",
+              "80×80 cm (teto)"
+            ]
+          ],
+          img: "img/catalogo/master-45.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,17×1,17×1,12 m · 80 kg (sem água) · Placa evaporativa 10 cm 45/45"
         },
         {
-          id: 'puro-portatil-15k',
-          name: 'Climatizador Portátil Industrial 15.000',
-          category: 'portateis',
-          badge: 'Pronta Entrega',
-          badgeStyle: 'bg-ice-400 text-obsidian',
-          vazao: '15.000 m³/h',
-          area: 'Até 120 m²',
-          consumo: '0,45 kW',
-          garantia: '1 Ano',
-          renderType: 'port-15k'
+          id: "master-55",
+          name: "Supper Master 55",
+          category: "master",
+          badge: "Lançamento",
+          badgeStyle: "bg-gold-400 text-obsidian",
+          vazao: "55.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "55.000 m³/h"
+            ],
+            [
+              "Motor",
+              "4 cv · 3,0 kW"
+            ],
+            [
+              "Reservatório",
+              "50 L"
+            ],
+            [
+              "Abertura",
+              "90×90 cm (teto)"
+            ]
+          ],
+          img: "img/catalogo/master-55.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,34×1,34×1,12 m · 90 kg (sem água) · Placa evaporativa 10 cm 45/45"
         },
         {
-          id: 'puro-portatil-8k',
-          name: 'Climatizador Portátil Compacto 8.500',
-          category: 'portateis',
-          badge: 'Plug & Play',
-          badgeStyle: 'bg-eco-400 text-obsidian',
-          vazao: '8.500 m³/h',
-          area: 'Até 75 m²',
-          consumo: '0,28 kW',
-          garantia: '1 Ano',
-          renderType: 'port-8k'
+          id: "abs-40",
+          name: "Supper 40 ABS Black",
+          category: "abs",
+          badge: "ABS Black",
+          badgeStyle: "bg-white text-obsidian",
+          vazao: "40.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "40.000 m³/h"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Reservatório",
+              "40 L"
+            ],
+            [
+              "Abertura",
+              "125×125 cm (parede)"
+            ]
+          ],
+          img: "img/catalogo/abs-40.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,76×1,56×0,90 m · 75 kg (sem água) · Placa evaporativa 15 cm 45/15"
+        },
+        {
+          id: "abs-50",
+          name: "Supper 50 ABS Black",
+          category: "abs",
+          badge: "ABS Black",
+          badgeStyle: "bg-white text-obsidian",
+          vazao: "50.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "50.000 m³/h"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Reservatório",
+              "50 L"
+            ],
+            [
+              "Abertura",
+              "125×125 cm (parede)"
+            ]
+          ],
+          img: "img/catalogo/abs-50.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,76×1,56×1,12 m · 100 kg (sem água) · Placa evaporativa 15 cm 45/15"
+        },
+        {
+          id: "abs-60",
+          name: "Supper 60 ABS Black",
+          category: "abs",
+          badge: "ABS Black",
+          badgeStyle: "bg-white text-obsidian",
+          vazao: "60.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "60.000 m³/h"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Reservatório",
+              "60 L"
+            ],
+            [
+              "Abertura",
+              "125×125 cm (parede)"
+            ]
+          ],
+          img: "img/catalogo/abs-60.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,76×1,56×1,12 m · 110 kg (sem água) · Placa evaporativa 20 cm 45/15"
+        },
+        {
+          id: "abs-80",
+          name: "Supper 80 ABS Black",
+          category: "abs",
+          badge: "Maior Vazão",
+          badgeStyle: "bg-gold-400 text-obsidian",
+          vazao: "80.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "80.000 m³/h"
+            ],
+            [
+              "Motor",
+              "3 cv · 2,2 kW"
+            ],
+            [
+              "Reservatório",
+              "80 L"
+            ],
+            [
+              "Abertura",
+              "139×139 cm (parede)"
+            ]
+          ],
+          img: "img/catalogo/abs-80.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 2,25×1,25×1,57 m · 130 kg · Placa evaporativa 15 cm 45/15"
+        },
+        {
+          id: "light-25-inferior",
+          name: "Supper 25 Saída Inferior",
+          category: "light",
+          badge: "Linha Light",
+          badgeStyle: "bg-eco-400 text-obsidian",
+          vazao: "25.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "25.000 m³/h"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Reservatório",
+              "30 L"
+            ],
+            [
+              "Abertura",
+              "67×67 ou 45×65 cm"
+            ]
+          ],
+          img: "img/catalogo/light-25-inferior.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,08×1,08×0,91 m · 60 kg (sem água) · Placa evaporativa 10 cm 45/45"
+        },
+        {
+          id: "light-25-superior",
+          name: "Supper 25 Saída Superior",
+          category: "light",
+          badge: "Linha Light",
+          badgeStyle: "bg-eco-400 text-obsidian",
+          vazao: "25.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "25.000 m³/h"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Reservatório",
+              "30 L"
+            ],
+            [
+              "Abertura",
+              "67×67 ou 45×65 cm"
+            ]
+          ],
+          img: "img/catalogo/light-25-superior.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,08×1,08×0,91 m · 60 kg (sem água) · Placa evaporativa 10 cm 45/45"
+        },
+        {
+          id: "light-25-lateral",
+          name: "Supper 25 Saída Lateral",
+          category: "light",
+          badge: "Linha Light",
+          badgeStyle: "bg-eco-400 text-obsidian",
+          vazao: "25.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "25.000 m³/h"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Reservatório",
+              "30 L"
+            ],
+            [
+              "Abertura",
+              "67×67 ou 45×65 cm"
+            ]
+          ],
+          img: "img/catalogo/light-25-lateral.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,08×1,08×0,91 m · 60 kg (sem água) · Placa evaporativa 10 cm 45/45"
+        },
+        {
+          id: "light-35",
+          name: "Supper 35 Saída Inferior",
+          category: "light",
+          badge: "Linha Light",
+          badgeStyle: "bg-eco-400 text-obsidian",
+          vazao: "35.000 m³/h",
+          specs: [
+            [
+              "Vazão",
+              "35.000 m³/h"
+            ],
+            [
+              "Motor",
+              "3 cv · 2,2 kW"
+            ],
+            [
+              "Reservatório",
+              "40 L"
+            ],
+            [
+              "Abertura",
+              "80×80 cm (teto)"
+            ]
+          ],
+          img: "img/catalogo/light-35.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,20×1,20×1,15 m · 85 kg (sem água) · Placa evaporativa 10 cm 45/45"
+        },
+        {
+          id: "exaustor-sp50",
+          name: "Exaustor SP-50",
+          category: "exaustor",
+          badge: "Exaustor",
+          badgeStyle: "bg-ice-400 text-obsidian",
+          vazao: "Exaustor SP-50",
+          specs: [
+            [
+              "Hélice",
+              "6 pás inox"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Largura",
+              "1,53 m"
+            ],
+            [
+              "Profund.",
+              "40 cm"
+            ]
+          ],
+          img: "img/catalogo/exaustor-sp50.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,53×1,53×0,40 m"
+        },
+        {
+          id: "exaustor-sp44",
+          name: "Exaustor SP-44",
+          category: "exaustor",
+          badge: "Exaustor",
+          badgeStyle: "bg-ice-400 text-obsidian",
+          vazao: "Exaustor SP-44",
+          specs: [
+            [
+              "Hélice",
+              "6 pás inox"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Largura",
+              "1,38 m"
+            ],
+            [
+              "Profund.",
+              "40 cm"
+            ]
+          ],
+          img: "img/catalogo/exaustor-sp50.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 1,38×1,38×0,40 m"
+        },
+        {
+          id: "exaustor-sp32",
+          name: "Exaustor SP-32",
+          category: "exaustor",
+          badge: "Compacto",
+          badgeStyle: "bg-ice-400 text-obsidian",
+          vazao: "Exaustor SP-32",
+          specs: [
+            [
+              "Hélice",
+              "4 pás inox"
+            ],
+            [
+              "Motor",
+              "2 cv · 1,5 kW"
+            ],
+            [
+              "Largura",
+              "74 cm"
+            ],
+            [
+              "Profund.",
+              "58 cm"
+            ]
+          ],
+          img: "img/catalogo/exaustor-sp32.webp",
+          imgFit: "object-contain p-4",
+          note: "Dimensão 0,74×0,74×0,58 m"
         },
         {
           id: 'duto-galv-reto',
@@ -1578,9 +1953,7 @@
           badge: 'Atacado & Varejo',
           badgeStyle: 'bg-gold-400 text-obsidian',
           vazao: 'Fluxo Laminar',
-          area: 'Sob Projeto',
-          consumo: 'Aço Galv.',
-          garantia: 'Anticorrosão',
+          specs: [['Tipo', 'Fluxo Laminar'], ['Aplicação', 'Sob Projeto'], ['Material', 'Aço Galv.'], ['Garantia', 'Anticorrosão']],
           renderType: 'duct-galv',
           img: 'img/dutos-recorte.png',
           imgFit: 'object-contain p-3'
@@ -1592,9 +1965,7 @@
           badge: 'Encaixe Preciso',
           badgeStyle: 'bg-gold-400 text-obsidian',
           vazao: 'Alta Vedação',
-          area: 'Obra Rápida',
-          consumo: 'Chapa Reforç.',
-          garantia: 'Certificado',
+          specs: [['Tipo', 'Alta Vedação'], ['Aplicação', 'Obra Rápida'], ['Material', 'Chapa Reforç.'], ['Garantia', 'Certificado']],
           renderType: 'duct-curve',
           img: 'img/grelha-recorte.png',
           imgFit: 'object-contain p-3'
@@ -1606,9 +1977,7 @@
           badge: 'Peças Originais',
           badgeStyle: 'bg-ice-500 text-obsidian',
           vazao: 'Alta Eficiência',
-          area: 'Universal',
-          consumo: 'Kit Completo',
-          garantia: '1 Ano',
+          specs: [['Tipo', 'Alta Eficiência'], ['Aplicação', 'Universal'], ['Material', 'Kit Completo'], ['Garantia', '1 Ano']],
           renderType: 'kit-acc'
         }
       ];
@@ -1719,24 +2088,14 @@
                   </h3>
 
                   <div class="grid grid-cols-2 gap-2 font-mono text-[11px]">
+                    ${p.specs.map((sp, i) => `
                     <div class="p-2 rounded-lg bg-obsidian/70 border border-white/5">
-                      <div class="text-[9px] text-slate-500 uppercase">Vazão</div>
-                      <div class="text-ice-300 font-bold">${p.vazao}</div>
-                    </div>
-                    <div class="p-2 rounded-lg bg-obsidian/70 border border-white/5">
-                      <div class="text-[9px] text-slate-500 uppercase">Área</div>
-                      <div class="text-white font-bold">${p.area}</div>
-                    </div>
-                    <div class="p-2 rounded-lg bg-obsidian/70 border border-white/5">
-                      <div class="text-[9px] text-slate-500 uppercase">Potência</div>
-                      <div class="text-eco-400 font-bold">${p.consumo}</div>
-                    </div>
-                    <div class="p-2 rounded-lg bg-obsidian/70 border border-white/5">
-                      <div class="text-[9px] text-slate-500 uppercase">Garantia</div>
-                      <div class="text-gold-400 font-bold">${p.garantia}</div>
-                    </div>
+                      <div class="text-[9px] text-slate-500 uppercase">${sp[0]}</div>
+                      <div class="${['text-ice-300', 'text-white', 'text-eco-400', 'text-gold-400'][i % 4]} font-bold">${sp[1]}</div>
+                    </div>`).join('')}
                   </div>
-                </div>
+                  ${p.note ? `<p class="text-[12px] text-slate-400 leading-snug">${p.note}</p>` : ''}
+                                </div>
               </div>
 
               <!-- Botões -->
